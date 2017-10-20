@@ -216,7 +216,7 @@ BEGIN
 			, 0
 			, CONVERT(varchar(10), con.createdAt, 103)
 			, ''
-			, 'marcmg' --RTRIM(LTRIM(emp.usuario))
+			, RTRIM(LTRIM(emp.usuario))
 			, 0
 			, 0
 			, 'Condonación'
@@ -266,7 +266,7 @@ BEGIN
 			, 0
 			, CONVERT(varchar(10), cm.createdAt, 103)
 			, ''
-			, 'marcmg' --RTRIM(LTRIM(emp.usuario))
+			, RTRIM(LTRIM(emp.usuario))
 			, 0
 			, 0
 			, cma.description

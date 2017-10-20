@@ -4,7 +4,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-ALTER PROCEDURE [dbo].[debtors](
+CREATE PROCEDURE [dbo].[debtors](
 	@credit int = 0
 	, @daysPastDue int = 0
 	, @branchOffices int = 0
