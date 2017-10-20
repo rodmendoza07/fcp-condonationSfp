@@ -4,7 +4,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-ALTER PROCEDURE [dbo].[managementRecord](
+CREATE PROCEDURE [dbo].[managementRecord](
 	@employee int = 0,
 	@client int = 0,
 	@credit int = 0,
