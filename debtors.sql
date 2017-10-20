@@ -4,7 +4,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[debtors](
+ALTER PROCEDURE [dbo].[debtors](
 	@credit int = 0
 	, @daysPastDue int = 0
 	, @branchOffices int = 0
@@ -42,14 +42,14 @@ BEGIN
 			, sal.CLIENTE AS [client]
 			, RTRIM(LTRIM(UPPER(REPLACE(cli.TITULAR, '*', '')))) AS [name]
 			, sal.SUCURSAL AS [branchoffice]
-			, RTRIM(LTRIM(suc.NOMBRE)) AS [branchoffice_description]
+			, REPLICATE('0', 5 - LEN(suc.id_departamento)) + CAST(suc.id_departamento AS varchar) + ' - ' + suc.descripcion AS [branchoffice_description]
 			, sal.PRODUCTO AS [product]
 			, RTRIM(LTRIM(UPPER(pro.INDDESC))) AS [product_description]
 			, sal.DIAMORA AS [days_mora]
 			, sal.SALDO_AC AS [balance]
 		FROM ISILOANSWEB.dbo.T_SALDOS sal WITH(NOLOCK)
 			INNER JOIN ISILOANSWEB.dbo.T_CTE cli WITH(NOLOCK) ON (cli.ACREDITADO = sal.CLIENTE)
-			INNER JOIN ISILOANSWEB.dbo.T_SUC suc WITH(NOLOCK) ON (suc.SUCURSAL = sal.SUCURSAL)
+			INNER JOIN CATALOGOS.dbo.tc_departamento suc WITH(NOLOCK) ON (suc.id_departamento = sal.SUCURSAL)
 			INNER JOIN ISILOANSWEB.dbo.T_CATID pro WITH(NOLOCK) ON (pro.INDICAT = sal.PRODUCTO AND pro.CATALOGO = 5)
 		WHERE (sal.CREDITO = @credit OR @credit = 0)
 			AND ((@daysPastDue <> 0 AND sal.DIAMORA BETWEEN @minValueDays AND @maxValueDays) OR (@daysPastDue = 0))
