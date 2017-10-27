@@ -6,18 +6,24 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE PROCEDURE [dbo].[getCondonations](
+ALTER PROCEDURE [dbo].[getCondonations](
 	@startDate varchar(8),
 	@endDate varchar(8)
 )
 AS
 BEGIN 
 	DECLARE @msg varchar(500) = ''
-	BEGIN TRY
-		SELECT con.credit
-			, RTRIM(LTRIM(emp.usuario)) AS [user]
+	BEGIN TRY                              
+		SELECT
+			RTRIM(LTRIM(emp.usuario)) AS [user]
 			, CONVERT(varchar(10), con.createdAt, 103) AS [date]
 			, CONVERT(varchar(10), con.createdAt, 108) AS [hour]
+			, con.credit
+			, cred.CLIENTE AS client
+			, REPLACE(cte.TITULAR, '*','') AS [name]
+			, cte.TELEF AS tel1
+			, cte.TELEF_2 AS tel2
+			, LTRIM(RTRIM(cte.DIRECCION)) + ', ' + LTRIM(RTRIM(cte.COLONIA)) + ', ' + LTRIM(RTRIM(cte.CIUDAD)) AS [address]
 			, CONVERT(varchar(10), con.datePromisePayment, 103) AS [datePromisePayment]
 			, con.commissionsPercent
 			, con.interestArrearsPercent
@@ -26,6 +32,8 @@ BEGIN
 			, con.capitalPercent
 		FROM CATALOGOS.dbo.Condonation con WITH(NOLOCK)
 			INNER JOIN CATALOGOS.dbo.tc_empleados emp WITH(NOLOCK) ON (emp.id_empleados = con.employee)
+			INNER JOIN ISILOANSWEB.dbo.T_CRED cred WITH(NOLOCK) ON (con.credit = cred.NUMERO)
+			INNER JOIN ISILOANSWEB.dbo.T_CTE cte WITH(NOLOCK) ON (cte.ACREDITADO = cred.CLIENTE)
 		WHERE CONVERT(varchar(8), con.createdAt, 112) BETWEEN @startDate AND @endDate
 			AND con.status = 1
 	END TRY
