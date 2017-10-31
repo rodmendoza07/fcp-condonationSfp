@@ -1,7 +1,7 @@
 USE CATALOGOS
 GO
 
-ALTER PROCEDURE [dbo].[sp_Condonation_ManagementFilters]
+CREATE PROCEDURE [dbo].[sp_Condonation_ManagementFilters]
 AS
 BEGIN
 	SELECT cc.id  

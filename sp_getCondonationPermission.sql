@@ -1,7 +1,7 @@
 USE CATALOGOS
 GO
 
-ALTER PROCEDURE [dbo].[sp_getCondonationPermission](
+CREATE PROCEDURE [dbo].[sp_getCondonationPermission](
 	@employee INT = 0
 	, @dayPeriod INT = 0
 )

@@ -35,14 +35,24 @@ INSERT INTO tc_condonationConfig (
 	, cc_button
 ) VALUES (1,60,3,1), (1,60,8,1)
 
---GESTOR, no existe en catalogo de empleados
-/*
+--GESTOR
+--Menor a 61 días
+INSERT INTO tc_condonationConfig (
+	cc_accesorios
+	--, cc_moratorios
+	, cc_dayPeriod
+	, cc_profileAllow
+	, cc_button
+) VALUES (1,60,69,1)
+
+--Mayor a 61 días
 INSERT INTO tc_condonationConfig (
 	cc_accesorios
 	, cc_moratorios
+	, cc_dayPeriod
 	, cc_profileAllow
-) VALUES (1,1,3)
-*/
+	, cc_button
+) VALUES (1,1,61,69,1)
 
 --SUBDIRECTOR 
 --Mayor a 61 días
@@ -66,16 +76,30 @@ INSERT INTO tc_condonationConfig (
 ) VALUES (1,1,60,86,1)
 
 
---DIRECTOR, no existe en catalogo de empleados.
-/*
+--DIRECTOR
+--Menor a 61 días
+INSERT INTO tc_condonationConfig (
+	cc_accesorios
+	, cc_moratorios
+	, cc_IVAinteresVencido
+	, cc_interesVencido
+	, cc_dayPeriod
+	, cc_profileAllow
+	, cc_button
+) VALUES (1,1,1,1,60,87,1)
+
+--Mayor a 61 días
 INSERT INTO tc_condonationConfig (
 	cc_accesorios
 	, cc_moratorios
 	, cc_IVAinteresVencido
 	, cc_interesVencido
 	, cc_capital
+	, cc_dayPeriod
 	, cc_profileAllow
-) VALUES (1,1,1,1,1,86)
-*/
+	, cc_button
+) VALUES (1,1,1,1,1,61,87,1)
+
 
 SELECT * FROM tc_condonationConfig
+--SELECT * FROM CATALOGOS.dbo.tc_empleados

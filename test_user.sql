@@ -6,6 +6,35 @@ Select *
 From CATALOGOS.dbo.te_users_passw_encrypt
 Where peusr_id = 694
 
+--Usuario claudia
+
+UPDATE CATALOGOS.dbo.te_users_passw_encrypt SET
+	peusr_passw_encrypt = 'a09c4db2d2c72be4fbc4c683bb65056d'
+	, peusr_passw_encrypt_lock = 0
+	, peusr_passw_encrypt_reset = 0
+WHERE peusr_user_id = 23
+
+--Usuario Monica Trujano
+UPDATE CATALOGOS.dbo.te_users_passw_encrypt SET
+	peusr_passw_encrypt = 'fa64b025b024ffee7604258ad5937b99'
+	, peusr_passw_encrypt_lock = 0
+	, peusr_passw_encrypt_reset = 0
+WHERE peusr_user_id = 1
+
+--Usuario Carlos Cobranza
+UPDATE CATALOGOS.dbo.te_users_passw_encrypt SET
+	peusr_passw_encrypt = '342cf7d3911bc693860bcc2caae64e7a'
+	, peusr_passw_encrypt_lock = 0
+	, peusr_passw_encrypt_reset = 0
+WHERE peusr_user_id = 29
+
+--Usuario Paco
+UPDATE CATALOGOS.dbo.te_users_passw_encrypt SET
+	peusr_passw_encrypt = '49313129888d127822cdfab68cccb634'
+	, peusr_passw_encrypt_lock = 0
+	, peusr_passw_encrypt_reset = 0
+WHERE peusr_user_id = 28
+
 
 Select  peusr_passw_encrypt_lock,peusr_passw_encrypt_reset,estatus, cve_depto, cve_puesto ,
 	deto.descripcion, emp.id_empleados, emp.usuario, nombre, ap_paterno, ap_materno, a.*
@@ -40,3 +69,5 @@ From ISILOANSWEB.dbo.T_CRED2
 
 Select top 5 *
 From ISILOANSWEB.dbo.T_SALDOS
+
+select * from CATALOGOS.dbo.tc_empleados
